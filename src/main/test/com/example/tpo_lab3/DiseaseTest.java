@@ -3,6 +3,9 @@ package com.example.tpo_lab3;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class DiseaseTest {
     @Test
     void createDiseaseTest() {
@@ -22,9 +25,10 @@ class DiseaseTest {
     @Test
     void addSymptomsTest() {
         Disease disease = new Disease();
-        String symptom = "Высокая температура";
-        String additionalInfo = "<=38";
-        disease.addSymptom(symptom, additionalInfo);
+        List<String> symptom = new ArrayList<>();
+        symptom.add("Высокая температура");
+        symptom.add("<=38");
+        disease.addSymptom(symptom);
         Assertions.assertEquals(symptom, disease.getSymptoms().get(0));
     }
 }

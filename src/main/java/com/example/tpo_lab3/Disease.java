@@ -28,11 +28,8 @@ public class Disease {
         this.severity = severity;
     }
 
-    public void addSymptom(String symptom, String additionalInfo) {
-        List<String> symptomTemp = new ArrayList<>();
-        symptomTemp.add(symptom);
-        symptomTemp.add(additionalInfo);
-        symptoms.add(symptomTemp);
+    public void addSymptom(List<String> symptom) {
+        symptoms.add(symptom);
     }
 
     public List<List<String>> getSymptoms() {
