@@ -7,9 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DiseaseTest {
     @Test
-    void createTherapistTest() {
+    void createDiseaseTest() {
         Disease disease = new Disease();
         Assertions.assertNotNull(disease);
+    }
+
+    @Test
+    void createSpecificDiseaseTest() {
+        Disease disease = new Disease();
+        disease.setName("Простуда");
+        disease.setSeverity("Легкая");
+        Assertions.assertEquals("Простуда", disease.getName());
+        Assertions.assertEquals("Легкая", disease.getSeverity());
     }
 
 }
