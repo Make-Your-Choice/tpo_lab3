@@ -1,5 +1,18 @@
 package com.example.tpo_lab3;
 
-public class TherapistController {
+import javafx.fxml.Initializable;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class TherapistController implements Initializable {
+    List<Disease> diseases = new ArrayList<>();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
 }

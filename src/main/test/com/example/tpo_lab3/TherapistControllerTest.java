@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 class TherapistControllerTest {
     @Test
-    void createTherapistTest() {
-        Therapist therapist = new Therapist();
-        Assertions.assertNotNull(therapist);
+    void createTherapistControllerTest() {
+        TherapistController therapistController = new TherapistController();
+        Assertions.assertNotNull(therapistController);
     }
 
 }

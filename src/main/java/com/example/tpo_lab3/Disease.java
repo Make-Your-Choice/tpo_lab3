@@ -6,10 +6,10 @@ import java.util.List;
 public class Disease {
     String name;
     String severity;
-    List<String> symptoms;
+    List<List<String>> symptoms;
 
     public Disease() {
-        symptoms = new ArrayList<>();
+        symptoms = new ArrayList<List<String>>();
     }
 
     public String getName() {
@@ -28,11 +28,14 @@ public class Disease {
         this.severity = severity;
     }
 
-    public void addSymptom(String symptom) {
-        symptoms.add(symptom);
+    public void addSymptom(String symptom, String additionalInfo) {
+        List<String> symptomTemp = new ArrayList<>();
+        symptomTemp.add(symptom);
+        symptomTemp.add(additionalInfo);
+        symptoms.add(symptomTemp);
     }
 
-    public List<String> getSymptoms() {
+    public List<List<String>> getSymptoms() {
         return symptoms;
     }
 }

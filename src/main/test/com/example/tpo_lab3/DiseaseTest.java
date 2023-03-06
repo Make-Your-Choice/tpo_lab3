@@ -3,8 +3,6 @@ package com.example.tpo_lab3;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class DiseaseTest {
     @Test
     void createDiseaseTest() {
@@ -24,8 +22,9 @@ class DiseaseTest {
     @Test
     void addSymptomsTest() {
         Disease disease = new Disease();
-        String symptom = "Температура";
-        disease.addSymptom(symptom);
+        String symptom = "Высокая температура";
+        String additionalInfo = "<=38";
+        disease.addSymptom(symptom, additionalInfo);
         Assertions.assertEquals(symptom, disease.getSymptoms().get(0));
     }
 }
