@@ -21,4 +21,11 @@ class DiseaseTest {
         Assertions.assertEquals("Легкая", disease.getSeverity());
     }
 
+    @Test
+    void addSymptomsTest() {
+        Disease disease = new Disease();
+        String symptom = "Температура";
+        disease.addSymptom(symptom);
+        Assertions.assertEquals(symptom, disease.getSymptoms().get(0));
+    }
 }
