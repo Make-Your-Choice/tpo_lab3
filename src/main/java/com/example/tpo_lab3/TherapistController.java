@@ -1,6 +1,8 @@
 package com.example.tpo_lab3;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
 import java.util.ArrayList;
