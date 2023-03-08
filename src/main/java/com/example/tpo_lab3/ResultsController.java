@@ -1,9 +1,11 @@
 package com.example.tpo_lab3;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -41,5 +43,11 @@ public class ResultsController implements Initializable {
             resultText += "\nНазвание: " + diseases.get(i).getName() + "\nВероятность: " + formatter.format(diseases.get(i).getProbability() / diseases.get(i).getSymptoms().size() * 100) + "%\n";
         }
         resultsTextArea.setText(resultText);
+    }
+
+    public void onOkButtonClick(ActionEvent actionEvent) {
+        resultsTextArea.setText("");
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        stage.close();
     }
 }

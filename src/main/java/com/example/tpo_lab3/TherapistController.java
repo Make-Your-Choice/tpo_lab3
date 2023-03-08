@@ -30,6 +30,8 @@ public class TherapistController implements Initializable {
     public RadioButton thirdRadioButton;
     @FXML
     public Button nextButton;
+    @FXML
+    public Button restartButton;
     List<Disease> diseases = new ArrayList<>();
     List<List<String>> questions = new ArrayList<List<String>>();
     int questionNumber;
@@ -48,6 +50,8 @@ public class TherapistController implements Initializable {
         secondRadioButton.setText(questions.get(0).get(2));
         thirdRadioButton.setText(questions.get(0).get(3));
         questionNumber = 1;
+
+        restartButton.setVisible(false);
     }
 
     void checkAnswers(int questionNumber, int answerNumber) {
@@ -245,7 +249,9 @@ public class TherapistController implements Initializable {
     }
 
     void showResults() throws IOException {
-        //todo вывести модальное окно, где будут выводиться три наиболее вероятные болезни с процентным соотношением для каждой
+        restartButton.setVisible(true);
+        nextButton.setDisable(true);
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("results.fxml"));
         Parent parent = fxmlLoader.load();
         ResultsController dialogController = fxmlLoader.<ResultsController>getController();
@@ -470,5 +476,18 @@ public class TherapistController implements Initializable {
         question.add("Да, сильное");
         question.add("Нет");
         questions.add(question);
+    }
+
+    public void onRestartButtonClick(ActionEvent actionEvent) {
+        nextButton.setDisable(false);
+        for(int i = 0; i < diseases.size(); i++) {
+            diseases.get(i).setProbability(0);
+        }
+        questionLabel.setText(questions.get(0).get(0));
+        firstRadioButton.setText(questions.get(0).get(1));
+        secondRadioButton.setText(questions.get(0).get(2));
+        thirdRadioButton.setText(questions.get(0).get(3));
+        questionNumber = 1;
+        restartButton.setVisible(false);
     }
 }
