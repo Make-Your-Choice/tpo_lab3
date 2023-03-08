@@ -2,12 +2,18 @@ package com.example.tpo_lab3;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -238,11 +244,22 @@ public class TherapistController implements Initializable {
         Collections.reverse(diseases);
     }
 
-    void showResults() {
+    void showResults() throws IOException {
         //todo вывести модальное окно, где будут выводиться три наиболее вероятные болезни с процентным соотношением для каждой
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("results.fxml"));
+        Parent parent = fxmlLoader.load();
+        ResultsController dialogController = fxmlLoader.<ResultsController>getController();
+        dialogController.setDiseases(diseases);
+        dialogController.showResults();
+
+        Scene scene = new Scene(parent, 600, 400);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
-    public void onNextButtonClick(ActionEvent actionEvent) {
+    public void onNextButtonClick(ActionEvent actionEvent) throws IOException {
         if(firstRadioButton.isSelected()) {
             checkAnswers(questionNumber, 1);
         } else if (secondRadioButton.isSelected()) {
