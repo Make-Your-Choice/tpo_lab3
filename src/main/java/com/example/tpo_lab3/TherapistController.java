@@ -1,6 +1,9 @@
 package com.example.tpo_lab3;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
@@ -11,8 +14,20 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TherapistController implements Initializable {
+    @FXML
+    public Label questionLabel;
+    @FXML
+    public RadioButton firstRadioButton;
+    @FXML
+    public ToggleGroup answersGroup;
+    @FXML
+    public RadioButton secondRadioButton;
+    @FXML
+    public RadioButton thirdRadioButton;
+    @FXML
+    public Button nextButton;
     List<Disease> diseases = new ArrayList<>();
-    List<String> questions = new ArrayList<>();
+    List<List<String>> questions = new ArrayList<List<String>>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -123,17 +138,89 @@ public class TherapistController implements Initializable {
         diseases.add(disease);
 
         //заполнение списка вопросов
-        questions.add("Наблюдается ли у вас повышенная температура?");
-        questions.add("Присутствует ли у вас кашель?");
-        questions.add("Присутствует ли у вас боль в горле?");
-        questions.add("Присутствует ли у вас насморк?");
-        questions.add("Наблюдается ли у вас слабость?");
-        questions.add("Присутствует ли у вас одышка?");
-        questions.add("Наблюдается ли у вас повышенное артериальное давление?");
-        questions.add("Присутствуют ли у вас головные боли?");
-        questions.add("Наблюдается ли у вас тошнота?");
-        questions.add("Присутствует ли у вас шум в ушах?");
-        questions.add("Наблюдается ли у вас снижение остроты зрения?");
+        List <String> question = new ArrayList<>();
+
+        question.add("Наблюдается ли у вас повышенная температура?");
+        question.add("Да, >38 С");
+        question.add("Да, <=38 C");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас кашель?");
+        question.add("Да, влажный");
+        question.add("Да, сухой");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас боль в горле?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас насморк?");
+        question.add("Да, со слабой заложенностью");
+        question.add("Да, с сильной заложенностью");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас слабость?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас одышка?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас повышенное артериальное давление?");
+        question.add("Да, >140");
+        question.add("Да, <=140");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствуют ли у вас головные боли?");
+        question.add("Да, слабые");
+        question.add("Да, сильные");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас тошнота?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас шум в ушах?");
+        question.add("Да, слабый");
+        question.add("Да, сильный");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас снижение остроты зрения?");
+        question.add("Да, слабое");
+        question.add("Да, сильное");
+        question.add("Нет");
+        questions.add(question);
+
+        //загрузка первого вопроса
+        questionLabel.setText(questions.get(0).get(0));
+        firstRadioButton.setText(questions.get(0).get(1));
+        secondRadioButton.setText(questions.get(0).get(2));
+        thirdRadioButton.setText(questions.get(0).get(3));
     }
 
     void checkAnswers(int questionNumber, int answerNumber) {
