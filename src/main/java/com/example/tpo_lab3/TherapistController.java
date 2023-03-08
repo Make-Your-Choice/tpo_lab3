@@ -1,5 +1,6 @@
 package com.example.tpo_lab3;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,10 +9,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TherapistController implements Initializable {
     @FXML
@@ -28,199 +26,22 @@ public class TherapistController implements Initializable {
     public Button nextButton;
     List<Disease> diseases = new ArrayList<>();
     List<List<String>> questions = new ArrayList<List<String>>();
+    int questionNumber;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //заполнение справочника болезней
-        //ОРВИ
-        Disease disease = new Disease();
-        disease.setName("ОРВИ");
-        disease.setSeverity("Легкая");
-
-        List<String> symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Высокая температура");
-        symptomsDisease.add("<=38");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Кашель");
-        symptomsDisease.add("Сухой");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Боли в горле");
-        symptomsDisease.add("Сильные");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Насморк");
-        symptomsDisease.add("Сильная заложенность");
-        disease.addSymptom(symptomsDisease);
-
-        diseases.add(disease);
-
-        //Грипп
-        disease = new Disease();
-        disease.setName("Грипп");
-        disease.setSeverity("Средняя");
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Высокая температура");
-        symptomsDisease.add(">38");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Слабость");
-        symptomsDisease.add("Сильная");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Кашель");
-        symptomsDisease.add("Влажный");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Боли в горле");
-        symptomsDisease.add("Сильные");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Одышка");
-        symptomsDisease.add("Слабая");
-        disease.addSymptom(symptomsDisease);
-
-        diseases.add(disease);
-
-        //Артериальная гипертония
-        disease = new Disease();
-        disease.setName("Артериальная гипертония");
-        disease.setSeverity("Высокая");
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Высокое артериальное давление");
-        symptomsDisease.add(">140");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Головная боль");
-        symptomsDisease.add("Сильная");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Тошнота");
-        symptomsDisease.add("Сильная");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Шум в ушах");
-        symptomsDisease.add("Слабый");
-        disease.addSymptom(symptomsDisease);
-
-        symptomsDisease = new ArrayList<>();
-
-        symptomsDisease.add("Снижение остроты зрения");
-        symptomsDisease.add("Слабое");
-        disease.addSymptom(symptomsDisease);
-
-        diseases.add(disease);
+        fillDiseases();
 
         //заполнение списка вопросов
-        List <String> question = new ArrayList<>();
-
-        question.add("Наблюдается ли у вас повышенная температура?");
-        question.add("Да, >38 С");
-        question.add("Да, <=38 C");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Присутствует ли у вас кашель?");
-        question.add("Да, влажный");
-        question.add("Да, сухой");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Присутствует ли у вас боль в горле?");
-        question.add("Да, слабая");
-        question.add("Да, сильная");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Присутствует ли у вас насморк?");
-        question.add("Да, со слабой заложенностью");
-        question.add("Да, с сильной заложенностью");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Наблюдается ли у вас слабость?");
-        question.add("Да, слабая");
-        question.add("Да, сильная");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Присутствует ли у вас одышка?");
-        question.add("Да, слабая");
-        question.add("Да, сильная");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Наблюдается ли у вас повышенное артериальное давление?");
-        question.add("Да, >140");
-        question.add("Да, <=140");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Присутствуют ли у вас головные боли?");
-        question.add("Да, слабые");
-        question.add("Да, сильные");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Наблюдается ли у вас тошнота?");
-        question.add("Да, слабая");
-        question.add("Да, сильная");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Присутствует ли у вас шум в ушах?");
-        question.add("Да, слабый");
-        question.add("Да, сильный");
-        question.add("Нет");
-        questions.add(question);
-
-        question = new ArrayList<>();
-        question.add("Наблюдается ли у вас снижение остроты зрения?");
-        question.add("Да, слабое");
-        question.add("Да, сильное");
-        question.add("Нет");
-        questions.add(question);
+        fillQuestions();
 
         //загрузка первого вопроса
         questionLabel.setText(questions.get(0).get(0));
         firstRadioButton.setText(questions.get(0).get(1));
         secondRadioButton.setText(questions.get(0).get(2));
         thirdRadioButton.setText(questions.get(0).get(3));
+        questionNumber = 1;
     }
 
     void checkAnswers(int questionNumber, int answerNumber) {
@@ -414,9 +235,223 @@ public class TherapistController implements Initializable {
             } break;
         }
         diseases.sort(Comparator.comparing(Disease::getProbability));
+        Collections.reverse(diseases);
     }
 
     void showResults() {
         //todo вывести модальное окно, где будут выводиться три наиболее вероятные болезни с процентным соотношением для каждой
+    }
+
+    public void onNextButtonClick(ActionEvent actionEvent) {
+        if(firstRadioButton.isSelected()) {
+            checkAnswers(questionNumber, 1);
+        } else if (secondRadioButton.isSelected()) {
+            checkAnswers(questionNumber, 2);
+        } else if (thirdRadioButton.isSelected()) {
+            checkAnswers(questionNumber, 3);
+        }
+        if(questionNumber == questions.size()) {
+            showResults();
+        }
+        else {
+            questionLabel.setText(questions.get(questionNumber).get(0));
+            firstRadioButton.setText(questions.get(questionNumber).get(1));
+            secondRadioButton.setText(questions.get(questionNumber).get(2));
+            thirdRadioButton.setText(questions.get(questionNumber).get(3));
+            questionNumber++;
+        }
+    }
+
+    public List<Disease> getDiseases() {
+        return diseases;
+    }
+
+    public void fillDiseases() {
+        //заполнение справочника болезней
+        //ОРВИ
+        Disease disease = new Disease();
+        disease.setName("ОРВИ");
+        disease.setSeverity("Легкая");
+
+        List<String> symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Высокая температура");
+        symptomsDisease.add("<=38");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Кашель");
+        symptomsDisease.add("Сухой");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Боли в горле");
+        symptomsDisease.add("Сильные");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Насморк");
+        symptomsDisease.add("Сильная заложенность");
+        disease.addSymptom(symptomsDisease);
+
+        diseases.add(disease);
+
+        //Грипп
+        disease = new Disease();
+        disease.setName("Грипп");
+        disease.setSeverity("Средняя");
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Высокая температура");
+        symptomsDisease.add(">38");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Слабость");
+        symptomsDisease.add("Сильная");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Кашель");
+        symptomsDisease.add("Влажный");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Боли в горле");
+        symptomsDisease.add("Сильные");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Одышка");
+        symptomsDisease.add("Слабая");
+        disease.addSymptom(symptomsDisease);
+
+        diseases.add(disease);
+
+        //Артериальная гипертония
+        disease = new Disease();
+        disease.setName("Артериальная гипертония");
+        disease.setSeverity("Высокая");
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Высокое артериальное давление");
+        symptomsDisease.add(">140");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Головная боль");
+        symptomsDisease.add("Сильная");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Тошнота");
+        symptomsDisease.add("Сильная");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Шум в ушах");
+        symptomsDisease.add("Слабый");
+        disease.addSymptom(symptomsDisease);
+
+        symptomsDisease = new ArrayList<>();
+
+        symptomsDisease.add("Снижение остроты зрения");
+        symptomsDisease.add("Слабое");
+        disease.addSymptom(symptomsDisease);
+
+        diseases.add(disease);
+    }
+
+    public void fillQuestions() {
+        //заполнение списка вопросов
+        List <String> question = new ArrayList<>();
+
+        question.add("Наблюдается ли у вас повышенная температура?");
+        question.add("Да, >38 С");
+        question.add("Да, <=38 C");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас кашель?");
+        question.add("Да, влажный");
+        question.add("Да, сухой");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас боль в горле?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас насморк?");
+        question.add("Да, со слабой заложенностью");
+        question.add("Да, с сильной заложенностью");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас слабость?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас одышка?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас повышенное артериальное давление?");
+        question.add("Да, >140");
+        question.add("Да, <=140");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствуют ли у вас головные боли?");
+        question.add("Да, слабые");
+        question.add("Да, сильные");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас тошнота?");
+        question.add("Да, слабая");
+        question.add("Да, сильная");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Присутствует ли у вас шум в ушах?");
+        question.add("Да, слабый");
+        question.add("Да, сильный");
+        question.add("Нет");
+        questions.add(question);
+
+        question = new ArrayList<>();
+        question.add("Наблюдается ли у вас снижение остроты зрения?");
+        question.add("Да, слабое");
+        question.add("Да, сильное");
+        question.add("Нет");
+        questions.add(question);
     }
 }
