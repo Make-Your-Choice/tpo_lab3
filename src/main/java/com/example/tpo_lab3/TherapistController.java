@@ -260,6 +260,7 @@ public class TherapistController implements Initializable {
 
         Scene scene = new Scene(parent, 600, 400);
         Stage stage = new Stage();
+        stage.setTitle("Результаты диагностики");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
