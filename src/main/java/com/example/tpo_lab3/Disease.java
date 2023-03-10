@@ -56,4 +56,8 @@ public class Disease {
             }
         }
     }
+
+    public double calculateProbabilityPercent() {
+        return probability / symptoms.size() * 100;
+    }
 }

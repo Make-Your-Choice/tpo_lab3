@@ -37,10 +37,10 @@ public class ResultsController implements Initializable {
     void showResults() {
         NumberFormat formatter = new DecimalFormat("#0.00");
         String resultText = "Наиболее вероятный диагноз\n";
-        resultText += "\nНазвание: " + diseases.get(0).getName() + "\nВероятность: " + formatter.format(diseases.get(0).getProbability() / diseases.get(0).getSymptoms().size() * 100) + "%\n";
+        resultText += "\nНазвание: " + diseases.get(0).getName() + "\nВероятность: " + formatter.format(diseases.get(0).calculateProbabilityPercent()) + "%\n";
         resultText += "\nМенее вероятные диагнозы\n";
         for (int i = 1; i < diseases.size(); i++) {
-            resultText += "\nНазвание: " + diseases.get(i).getName() + "\nВероятность: " + formatter.format(diseases.get(i).getProbability() / diseases.get(i).getSymptoms().size() * 100) + "%\n";
+            resultText += "\nНазвание: " + diseases.get(i).getName() + "\nВероятность: " + formatter.format(diseases.get(i).calculateProbabilityPercent()) + "%\n";
         }
         resultsTextArea.setText(resultText);
     }
